@@ -5,13 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Confirmation</title>
     <style>
-        /* Reuse the same CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         body {
             background: linear-gradient(135deg, #0070ba, #00488f);
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
         }
         .container {
             background-color: #fff;
@@ -22,16 +29,20 @@
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
-        input, button {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-        }
         button {
             background-color: #0070ba;
             color: white;
             border: none;
             border-radius: 8px;
+            cursor: pointer;
+        }
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        p {
+            margin-top: 20px;
+            font-size: 1rem;
         }
     </style>
 </head>
@@ -40,9 +51,15 @@
 <div class="container">
     <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal Logo" style="width: 150px;">
     <h2>Confirmation</h2>
-    <p>Thank you for providing your details. Your account has been verified successfully.</p>
-    <p>If you have any questions, please contact support.</p>
+    <p>Your details have been successfully submitted!</p>
+    <button onclick="redirectHome()">Go to Home</button>
 </div>
+
+<script>
+    function redirectHome() {
+        window.location.href = "index.html";
+    }
+</script>
 
 </body>
 </html>
