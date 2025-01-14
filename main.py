@@ -162,19 +162,23 @@ def handle_file(message):
 # Callback query handler for buttons
 @bot.callback_query_handler(func=lambda call: True)
 def callback_inline(call):
-    # Immediately answer the callback query to avoid expiration
-    bot.answer_callback_query(call.id)
-    
-    if call.data == 'total':
-        bot.send_message(call.message.chat.id, "Total combos processed.")
-    elif call.data == 'hit':
-        bot.send_message(call.message.chat.id, "Hit accounts show a balance.")
-    elif call.data == 'good':
-        bot.send_message(call.message.chat.id, "Good accounts show no balance.")
-    elif call.data == 'dead':
-        bot.send_message(call.message.chat.id, "Dead accounts could not log in.")
-    elif call.data == 'error':
-        bot.send_message(call.message.chat.id, "Error occurred while processing some accounts.")
+    try:
+        # Answer the callback query promptly to avoid timeout errors
+        bot.answer_callback_query(call.id)
+        
+        # Handle the callback data
+        if call.data == 'total':
+            bot.send_message(call.message.chat.id, "Total combos processed.")
+        elif call.data == 'hit':
+            bot.send_message(call.message.chat.id, "Hit accounts show a balance.")
+        elif call.data == 'good':
+            bot.send_message(call.message.chat.id, "Good accounts show no balance.")
+        elif call.data == 'dead':
+            bot.send_message(call.message.chat.id, "Dead accounts could not log in.")
+        elif call.data == 'error':
+            bot.send_message(call.message.chat.id, "Error occurred while processing some accounts.")
+    except Exception as e:
+        print(f"Error in callback: {e}")
 
 # Run the bot with rate-limited polling
 bot.polling(none_stop=True, interval=2, allowed_updates=['message', 'callback_query'])
