@@ -125,7 +125,7 @@ def process_file(file_path, chat_id, message_id):
             update_keyboard(chat_id, total, hits, good, dead, errors, message_id)
 
             # Add delay to avoid hitting rate limit
-            time.sleep(1.5)
+            time.sleep(0.3)
 
 # Start Command Handler
 @bot.message_handler(commands=['start'])
